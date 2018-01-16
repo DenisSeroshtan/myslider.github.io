@@ -8,13 +8,15 @@
       duration: 2000,
       next: ".next",
       prev: ".prev",
-      dots: "true"
+      dots: "true",
+      moveSlide: "horizontal"
     }, settings);
 
     this.each(function () {
+
       var thisSlider = $(this);
 
-      if (!thisSlider.hasClass('my-slider')) {
+      if (!thisSlider.hasClass('mySlider')) {
         return;
       }
 
@@ -63,6 +65,7 @@
               slides = container.find('.slider__item'),
               activeSlide = slides.filter('.active'),
               slideWidth = slides.width(),
+              slideHeight = slide.height(),
               duration = 500,
               reqCssPosition = 0,
               reqSlideStrafe = 0;
@@ -74,41 +77,81 @@
             flag = true
 
             if (direction === "forward") {
-              reqCssPosition = slideWidth;
-              reqSlideStrafe = -slideWidth;
+              if (options.moveSlide == "horizontal") {
+                reqCssPosition = slideWidth;
+                reqSlideStrafe = -slideWidth;
+              } else if (options.moveSlide == "vertical") {
+                reqCssPosition = slideHeight;
+                reqSlideStrafe = -slideHeight;
+              }
+
             } else if (direction === "backward") {
-              reqCssPosition = -slideWidth;
-              reqSlideStrafe = slideWidth;
+              if (options.moveSlide == "horizontal") {
+                reqCssPosition = -slideWidth;
+                reqSlideStrafe = slideWidth;
+              } else if (options.moveSlide == "vertical") {
+                reqCssPosition = -slideHeight;
+                reqSlideStrafe = slideHeight;
+              }
             }
-            slide.css('left', reqCssPosition).addClass('inslide');
 
-            var movebleSlide = slides.filter('.inslide');
+            if (options.moveSlide == "horizontal") {
+              slide.css('left', reqCssPosition).addClass('inslide');
+              var movebleSlide = slides.filter('.inslide');
 
-            activeSlide.animate({
-              left: reqSlideStrafe
-            }, duration);
-            movebleSlide.animate({
-              left: 0
-            }, duration, function () {
-              var $this = $(this);
-              slides.css("left", 0).removeClass('active');
-              $this.toggleClass('inslide active')
+              activeSlide.animate({
+                left: reqSlideStrafe
+              }, duration);
 
-              // _this.setActiveDot(container.find(".slider__dots"));
+              movebleSlide.animate({
+                left: 0
+              }, duration, function () {
+                var $this = $(this);
+                slides.css("left", 0).removeClass('active');
+                $this.toggleClass('inslide active')
 
-              flag = false;
+                // _this.setActiveDot(container.find(".slider__dots"));
+                flag = false;
 
-            });
-            
+              });
+
+            } else if (options.moveSlide == "vertical") {
+
+              slide.css({
+                top: reqCssPosition
+              }).addClass('inslide');
+
+              var movebleSlide = slides.filter('.inslide');
+
+              activeSlide.animate({
+                top: reqSlideStrafe
+              }, duration);
+              
+              movebleSlide.animate({
+                top: 0
+              }, duration, function () {
+                var $this = $(this);
+                slides.css({
+                  top : 0
+                }).removeClass('active');
+                $this.toggleClass('inslide active')
+
+                // _this.setActiveDot(container.find(".slider__dots"));
+                flag = false;
+
+              });
+
+            }
+
           },
         }
 
 
       })()
-      
-    // инициализация слайдера
+
+      // инициализация слайдера
       Slider.init();
-      
+
     })
 
     return this;
@@ -116,5 +159,11 @@
 })(jQuery)
 
 $(function () {
-  $('.slider').mySlider()
+  $('.slider').mySlider({
+//    moveSlide: "vertical"
+  })
+  
+  $('.slider__two').mySlider({
+    moveSlide : "vertical"
+  })
 })

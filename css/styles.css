@@ -35,7 +35,7 @@ img{
   width: 100%;
   min-height: 0;
 }
-.container .slider {
+.container .slider,.slider__two {
 	display: flex;
 	justify-content: center;
     max-width: 400px;
