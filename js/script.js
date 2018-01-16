@@ -69,81 +69,62 @@
               duration = 500,
               reqCssPosition = 0,
               reqSlideStrafe = 0;
+            
+            function directionAnimate(pos){
+             
+            if (pos == "top"){
+              if (direction == "forward"){
+                reqCssPosition = slideHeight;
+                reqSlideStrafe = -slideHeight;
+              } else if (direction == "backward") {
+                reqCssPosition = -slideHeight;
+                reqSlideStrafe = slideHeight;
+              }
+            } else if (pos == "left") {
+              if (direction == "forward"){
+                reqCssPosition = slideWidth;
+                reqSlideStrafe = -slideWidth
+              } else if (direction == "backward") {
+                reqCssPosition = -slideWidth;
+                reqSlideStrafe = slideWidth;
+              }
+            
+            } 
+            
+              objActiveAnimate = {};
+              objMovebleAnimate = {};
+              
+              objActiveAnimate[pos] = reqSlideStrafe;
+              objMovebleAnimate[pos] = 0
+              
+              slide.css(pos,reqCssPosition).addClass('inslide');
+              var movebleSlide = slides.filter('.inslide');
 
+              activeSlide.animate(objActiveAnimate, duration);
+              
+              movebleSlide.animate(objMovebleAnimate, duration, function () {
+                var $this = $(this);
+                slides.css(pos, 0).removeClass('active');
+                $this.toggleClass('inslide active');
+
+                // _this.setActiveDot(container.find(".slider__dots"));
+                flag = false;
+
+              });
+            }  
 
             if (flag) {
               return;
             }
-            flag = true
-
-            if (direction === "forward") {
-              if (options.moveSlide == "horizontal") {
-                reqCssPosition = slideWidth;
-                reqSlideStrafe = -slideWidth;
-              } else if (options.moveSlide == "vertical") {
-                reqCssPosition = slideHeight;
-                reqSlideStrafe = -slideHeight;
-              }
-
-            } else if (direction === "backward") {
-              if (options.moveSlide == "horizontal") {
-                reqCssPosition = -slideWidth;
-                reqSlideStrafe = slideWidth;
-              } else if (options.moveSlide == "vertical") {
-                reqCssPosition = -slideHeight;
-                reqSlideStrafe = slideHeight;
-              }
+            flag = true;
+            
+            if (options.moveSlide == "horizontal") {           
+              directionAnimate("left");
+            } else if(options.moveSlide == "vertical") {             
+              directionAnimate("top")
             }
 
-            if (options.moveSlide == "horizontal") {
-              slide.css('left', reqCssPosition).addClass('inslide');
-              var movebleSlide = slides.filter('.inslide');
-
-              activeSlide.animate({
-                left: reqSlideStrafe
-              }, duration);
-
-              movebleSlide.animate({
-                left: 0
-              }, duration, function () {
-                var $this = $(this);
-                slides.css("left", 0).removeClass('active');
-                $this.toggleClass('inslide active')
-
-                // _this.setActiveDot(container.find(".slider__dots"));
-                flag = false;
-
-              });
-
-            } else if (options.moveSlide == "vertical") {
-
-              slide.css({
-                top: reqCssPosition
-              }).addClass('inslide');
-
-              var movebleSlide = slides.filter('.inslide');
-
-              activeSlide.animate({
-                top: reqSlideStrafe
-              }, duration);
-              
-              movebleSlide.animate({
-                top: 0
-              }, duration, function () {
-                var $this = $(this);
-                slides.css({
-                  top : 0
-                }).removeClass('active');
-                $this.toggleClass('inslide active')
-
-                // _this.setActiveDot(container.find(".slider__dots"));
-                flag = false;
-
-              });
-
-            }
-
-          },
+          }
         }
 
 
@@ -160,7 +141,7 @@
 
 $(function () {
   $('.slider').mySlider({
-//    moveSlide: "vertical"
+
   })
   
   $('.slider__two').mySlider({
