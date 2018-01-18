@@ -1,19 +1,15 @@
 (function ($) {
   $.fn.mySlider = function (settings) {
 
-    //    var that = this;
-
     var options = $.extend({
-      auto: false,
-      duration: 2000,
-      next: ".next",
-      prev: ".prev",
+      autoSlide: false,
       dots: "true",
       moveSlide: "horizontal",
       activeSlideNum: 1,
       buttons: true,
       dots: true,
-      btnArray: ['>', '<']
+      btnArray: ['>', '<'],
+      duration: 4000
     }, settings);
 
     this.each(function () {
@@ -21,30 +17,34 @@
       var thisSlider = $(this);
       var items = thisSlider.find('.mySlider__item');
 
+
       if (!thisSlider.hasClass('mySlider')) {
         return;
       }
 
       var Slider = (function () {
         var flag = false;
+        var timer = 0;
 
         return {
           init: function () {
 
             var _this = this;
-
+            // создаем дополнительные элементы
             _this.createElement();
 
             var
               btn = thisSlider.find(".mySlider__btn"),
               dots = thisSlider.find(".mySlider__dots-item");
-
+            // автопереключение
+            if (options.autoSlide)
+              _this.autoSwitch();
+            // переключение по кнопкам
             btn.on('click', function (e) {
               e.preventDefault();
 
               var
                 $this = $(this),
-                //                slides = $this.closest(thisSlider).find(items),
                 slides = items,
                 activeSlide = slides.filter('.active'),
                 nextSlide = activeSlide.next(),
@@ -52,7 +52,7 @@
                 firstSlide = slides.first(),
                 lastSlide = slides.last();
 
-              //  _this.clearTimer(settings.duration);
+              _this.clearTimer();
 
               if ($this.hasClass("mySlider__btn-next")) {
                 if (nextSlide.length) {
@@ -69,9 +69,7 @@
 
               }
             });
-
-
-
+            // переключение по точкам
             dots.on('click', function (e) {
               e.preventDefault();
 
@@ -82,8 +80,10 @@
                 direction = (activeDot.index() < curDotNum) ? 'forward' : 'backward',
                 reqSlide = items.eq(curDotNum);
 
-              if (!$this.hasClass('active'))
+              if (!$this.hasClass('active')) {
                 _this.moveSlide(reqSlide, direction);
+                _this.clearTimer();
+              }
 
             });
 
@@ -99,7 +99,7 @@
             } else {
               items.eq(0).addClass('active');
             }
-            //создаем  buttons
+            //создаем  кнопки для переключения
             if (options.buttons) {
 
               thisSlider.append('<div class="mySlider__nav" />');
@@ -110,12 +110,12 @@
               var
                 btnNext = thisSlider.find('.mySlider__btn-next'),
                 btnPrev = thisSlider.find('.mySlider__btn-prev');
-
+              // добавляем кнопки из настроек 
               btnNext.html(options.btnArray[0]);
               btnPrev.html(options.btnArray[1]);
 
-
             }
+            // создаем точки для переключения
             if (options.dots) {
               thisSlider.append('<ul class="mySlider__dots" />');
 
@@ -126,12 +126,12 @@
               for (var i = 0; i < items.length; i++) {
                 dotsContainer.append(dotsMarkup);
               }
-
+              // устанавливаем активную точку
               _this.setActiveDot();
             }
 
           },
-          setActiveDot: function (container) {
+          setActiveDot: function () {
             var
               slides = items;
 
@@ -141,11 +141,34 @@
               .siblings()
               .removeClass('active')
           },
+          autoSwitch: function () {
+            var
+              _this = this;
+
+            timer = setInterval(function () {
+              var
+                slides = items,
+                activeSlide = slides.filter('.active'),
+                nextSlide = activeSlide.next(),
+                firstSlide = slides.first();
+
+              if (nextSlide.length) {
+                _this.moveSlide(nextSlide, 'forward');
+              } else {
+                _this.moveSlide(firstSlide, 'forward');
+              }
+            }, options.duration);
+
+          },
+          clearTimer: function (duration) {
+            if (timer) {
+              clearInterval(timer);
+              this.autoSwitch();
+            }
+          },
           moveSlide: function (slide, direction) {
             var
               _this = this,
-              //              container = slide.closest(thisSlider),
-              //                slides =container.find('.mySlider__item'),
               slides = items,
               activeSlide = slides.filter('.active'),
               slideWidth = slides.width(),
@@ -178,15 +201,17 @@
               objMovebleAnimate = {};
 
               objActiveAnimate[pos] = reqSlideStrafe;
-              objMovebleAnimate[pos] = 0
+              objMovebleAnimate[pos] = 0;
 
               slide.css(pos, reqCssPosition).addClass('inslide');
+
               var movebleSlide = slides.filter('.inslide');
 
               activeSlide.animate(objActiveAnimate, duration);
 
               movebleSlide.animate(objMovebleAnimate, duration, function () {
                 var $this = $(this);
+
                 slides.css(pos, 0).removeClass('active');
                 $this.toggleClass('inslide active');
 
@@ -196,7 +221,7 @@
 
               });
             }
-
+            // флаг для анимации
             if (flag) {
               return;
             }
@@ -207,18 +232,16 @@
             } else if (options.moveSlide == "vertical") {
               directionAnimate("top")
             }
-
           }
+
         }
 
-
-      })()
+      })();
 
       // инициализация слайдера
       Slider.init();
 
     })
-
     return this;
   }
 })(jQuery)
@@ -232,6 +255,7 @@ $(function () {
     moveSlide: "vertical",
     activeSlideNum: 2,
     btnArray: ["up", "dn"],
-    dots: false
+    //    dots: false,
+    autoSlide: true
   })
 })

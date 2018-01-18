@@ -15,7 +15,11 @@ img {
   min-height: 0;
 }
 
-.container .slider,
+.container {
+  margin-top: 40px;
+}
+
+.slider,
 .slider__two {
   display: flex;
   flex-direction: column;
@@ -34,7 +38,7 @@ img {
 
 .mySlider__item {
   position: absolute;
-  background: #e5e5e5;
+  background: #ccc;
   width: 100%;
   top: 0;
   left: 0;
@@ -63,33 +67,15 @@ img {
   color: #000;
   font-family: Arial, sans-serif;
   background: #909090;
-  top: 50%;
-  margin-top: -20px;
+  top: 0;
 }
 
 .mySlider__btn-next {
   left: 100%;
-  /*
-  width: 30px;
-  height: 30px;
-*/
-  /*    background: #000;*/
 }
 
 .mySlider__btn-prev {
   right: 100%;
-  /*
-  width: 30px;
-  height: 30px;
-*/
-  /*    background: #000;*/
-}
-
-.slider__dots {
-  /*
-	display: inline-block;
-	margin-top: 20px;
-*/
 }
 
 .mySlider__dots-item {
@@ -98,12 +84,12 @@ img {
   height: 20px;
   border-radius: 50%;
   background: #ccc;
-  margin-right: rem(10px);
+  margin-right: 5px;
   cursor: pointer;
 }
 
 .mySlider__dots-item.active {
-  background: yellow;
+  background: #2e2c2c;
 }
 
 .slider__dots-link {
