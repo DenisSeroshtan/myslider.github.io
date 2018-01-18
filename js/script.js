@@ -11,7 +11,8 @@
       dots: "true",
       moveSlide: "horizontal",
       activeSlideNum: 1,
-      navButtons: true,
+      buttons: true,
+      dots: true,
       btnArray: ['>', '<']
     }, settings);
 
@@ -77,8 +78,8 @@
             } else {
               items.eq(0).addClass('active');
             }
-            //создаем контейнер для buttons
-            if (options.navButtons) {
+            //создаем  buttons
+            if (options.buttons) {
 
               thisSlider.append('<div class="mySlider__nav" />');
               var navContainer = thisSlider.find('.mySlider__nav');
@@ -94,17 +95,30 @@
 
 
             }
+            if (options.dots) {
+              thisSlider.append('<ul class="mySlider__dots" />');
 
+              var
+                dotsContainer = thisSlider.find('.mySlider__dots'),
+                dotsMarkup = '<li class="mySlider__dots-item" />';
 
+              for (var i = 0; i < items.length; i++) {
+                dotsContainer.append(dotsMarkup);
+              }
 
-            //            var btnNext = document.createElement("div");
-            //            btnNext.classList.add = "mySlider__btn mySlider__btn-next";
-            //            btnNext.appendChild(btns);
-            //            
-            //            var btnPrev = document.createElement("div");
-            //            btnNext.classList.add = "mySlider__btn mySlider__btn-prev";
-            //            btnNext.appendChild(btns);
+              _this.setActiveDot();
+            }
 
+          },
+          setActiveDot: function (container) {
+            var
+              slides = items;
+
+            thisSlider.find('.mySlider__dots-item')
+              .eq(slides.filter('.active').index())
+              .addClass('active')
+              .siblings()
+              .removeClass('active')
           },
           moveSlide: function (slide, direction) {
             var

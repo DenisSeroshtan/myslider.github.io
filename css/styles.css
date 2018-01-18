@@ -18,19 +18,13 @@ img {
 .container .slider,
 .slider__two {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   max-width: 400px;
   margin: auto;
   text-align: center;
   position: relative;
 }
-
-/*
-.slider__wrap {
-	text-align: center;
-	position: relative;
-}
-*/
 
 .mySlider__list {
   position: relative;
@@ -98,17 +92,17 @@ img {
 */
 }
 
-.slider__dots-item {
+.mySlider__dots-item {
   display: inline-block;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background: #ccc;
   margin-right: rem(10px);
-
+  cursor: pointer;
 }
 
-.slider__dots-item.active {
+.mySlider__dots-item.active {
   background: yellow;
 }
 
