@@ -2,14 +2,14 @@
   $.fn.mySlider = function (settings) {
 
     var options = $.extend({
-      autoSlide: false,
-      dots: "true",
       moveSlide: "horizontal",
       activeSlideNum: 1,
       buttons: true,
       dots: true,
       btnArray: ['>', '<'],
-      duration: 4000
+      duration: 4000,
+      autoSlide: false,
+      equalHeights: false
     }, settings);
 
     this.each(function () {
@@ -17,9 +17,24 @@
       var thisSlider = $(this);
       var items = thisSlider.find('.mySlider__item');
 
-
       if (!thisSlider.hasClass('mySlider')) {
         return;
+      }
+      // устанавливаем одинаковую высоту блокам items
+      if (options.equalHeights) {
+        function equal() {
+          items.height('auto');
+          maxHeight = 0
+          items.each(function () {
+            var
+              $this = $(this),
+              itemsHeight = $this.outerHeight();
+            maxHeight = (itemsHeight > maxHeight) ? itemsHeight : maxHeight;
+          })
+          items.height(maxHeight);
+        }
+        equal();
+        $(window).on('resize', equal);
       }
 
       var Slider = (function () {
@@ -171,8 +186,8 @@
               _this = this,
               slides = items,
               activeSlide = slides.filter('.active'),
-              slideWidth = slides.width(),
-              slideHeight = slide.height(),
+              slideWidth = slides.outerWidth(),
+              slideHeight = slide.outerHeight(),
               duration = 500,
               reqCssPosition = 0,
               reqSlideStrafe = 0;
@@ -245,17 +260,3 @@
     return this;
   }
 })(jQuery)
-
-$(function () {
-  $('.slider').mySlider({
-
-  })
-
-  $('.slider__two').mySlider({
-    moveSlide: "vertical",
-    activeSlideNum: 2,
-    btnArray: ["up", "dn"],
-    //    dots: false,
-    autoSlide: true
-  })
-})

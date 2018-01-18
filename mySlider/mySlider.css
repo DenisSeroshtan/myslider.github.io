@@ -1,0 +1,59 @@
+.mySlider__list {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.mySlider__item {
+  position: absolute;
+  background: #ccc;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.mySlider__item.active {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.mySlider__item.inslide {
+  z-index: 2;
+  width: 100%;
+}
+
+.mySlider__btn {
+  position: absolute;
+  cursor: pointer;
+  min-width: 40px;
+  min-height: 40px;
+  font-size: 40px;
+  color: #000;
+  font-family: Arial, sans-serif;
+  background: #909090;
+  top: 0;
+}
+
+.mySlider__btn-next {
+  left: 100%;
+}
+
+.mySlider__btn-prev {
+  right: 100%;
+}
+
+.mySlider__dots-item {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.mySlider__dots-item.active {
+  background: #2e2c2c;
+}
