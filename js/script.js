@@ -35,7 +35,10 @@
 
             _this.createElement();
 
-            var btn = thisSlider.find(".mySlider__btn");
+            var
+              btn = thisSlider.find(".mySlider__btn"),
+              dots = thisSlider.find(".mySlider__dots-item");
+
             btn.on('click', function (e) {
               e.preventDefault();
 
@@ -66,6 +69,24 @@
 
               }
             });
+
+
+
+            dots.on('click', function (e) {
+              e.preventDefault();
+
+              var
+                $this = $(this),
+                activeDot = dots.filter('.active'),
+                curDotNum = $this.index(),
+                direction = (activeDot.index() < curDotNum) ? 'forward' : 'backward',
+                reqSlide = items.eq(curDotNum);
+
+              if (!$this.hasClass('active'))
+                _this.moveSlide(reqSlide, direction);
+
+            });
+
           },
           createElement: function () {
             var _this = this;
@@ -169,7 +190,8 @@
                 slides.css(pos, 0).removeClass('active');
                 $this.toggleClass('inslide active');
 
-                // _this.setActiveDot(container.find(".slider__dots"));
+                _this.setActiveDot();
+
                 flag = false;
 
               });
@@ -209,6 +231,7 @@ $(function () {
   $('.slider__two').mySlider({
     moveSlide: "vertical",
     activeSlideNum: 2,
-    btnArray: ["up", "dn"]
+    btnArray: ["up", "dn"],
+    dots: false
   })
 })
