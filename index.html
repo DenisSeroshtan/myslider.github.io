@@ -1,92 +1,50 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Первый сайт</title>
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body>
-        <div class="buttons">
-                <input type="button" value="Назад" class="p">
-                <input type="button" value="Вперёд" class="n">
-		</div>
-        <div class="gallery ">
-            <div class="photos">
-                <img src="img/Chrysanthemum.jpg" class="showed" alt="">
-                <img src="img/Desert.jpg" alt="">
-                <img src="img/Hydrangeas.jpg" alt="">
-                <img src="img/Jellyfish.jpg" alt="">
-                <img src="img/Koala.jpg" alt="">
-                <img src="img/Lighthouse.jpg" alt="">
-                <img src="img/Penguins.jpg" alt="">
-                <img src="img/Tulips.jpg" alt="">
-            </div>
-            <div class="buttons">
-                <input type="button" value="Назад" class="prev">
-                <input type="button" value="Вперёд" class="next">
-            </div>
+
+<head>
+  <meta charset="utf-8">
+  <title>Первый сайт</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+
+  <div class="container">
+    <div class="slider mySlider">
+
+      <div class="mySlider__item">
+        <img src="img/Desert.jpg" alt="">
+      </div>
+
+      <div class="mySlider__item">
+        <img src="img/Lighthouse.jpg" alt="">
+      </div>
+
+      <div class="mySlider__item">
+        <img src="img/Koala.jpg" alt="">
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div class="slider__two mySlider">
+
+
+        <div class="mySlider__item">
+          <img src="img/Desert.jpg" alt="">
         </div>
- 
-        <div class="container">
-          <div class="slider mySlider">
-            <div class="slider__wrap">
-                  <ul class="slider__list">
-                    <li class="slider__item active">
-                        <img src="img/Desert.jpg" alt="">
-                    </li>
-                    <li class="slider__item">
-                        <img src="img/Lighthouse.jpg" alt="">
-                    </li>
-                    <div class="slider__item">
-                        <img src="img/Koala.jpg" alt="">
-                    </li>
-                  </ul>
-                  <div class="slider__nav">
-                    <div class="slider__arr slider__arr-next"></div>
-                    <div class="slider__arr slider-arr-prev"></div>
-                  </div>
-                  <ul class="slider__dots"></ul>
-                </div>
-            </div>
+        <div class="mySlider__item">
+          <img src="img/Lighthouse.jpg" alt="">
         </div>
-        
-        <div class="container">
-          <div class="slider__two mySlider">
-            <div class="slider__wrap">
-                  <ul class="slider__list">
-                    <li class="slider__item active">
-                        <img src="img/Desert.jpg" alt="">
-                    </li>
-                    <li class="slider__item">
-                        <img src="img/Lighthouse.jpg" alt="">
-                    </li>
-                    <div class="slider__item">
-                        <img src="img/Koala.jpg" alt="">
-                    </li>
-                  </ul>
-                  <div class="slider__nav">
-                    <div class="slider__arr slider__arr-next"></div>
-                    <div class="slider__arr slider-arr-prev"></div>
-                  </div>
-                  <ul class="slider__dots"></ul>
-                </div>
-            </div>
+        <div class="mySlider__item">
+          <img src="img/Koala.jpg" alt="">
         </div>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/script.js"></script>
-    </body>
+
+      </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
