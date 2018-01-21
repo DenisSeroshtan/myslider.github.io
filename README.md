@@ -51,42 +51,49 @@ Set JS
   * activeSlideNum
     * type: number
     * default: 1
-  The number of items you want to see on the screen.  
-  
+the number of items you want to see on the screen.  
+
+
   * moveSlide
     * type: string
     * default: "horizontal"
-  move animation of slides "horizontal" or "vertical"
-  
+move animation of slides "horizontal" or "vertical"
+
+
   * buttons
     * type: boolean
     * default: true
-  Show next/prev buttons.
-  
+Show next/prev buttons.
+
+
   * btnArray
     * type: array
     * default: ['>', '<']
-  HTML allowed
-  
+HTML allowed
+
+
   * dots
     * type: boolean
     * default: true
-  Show dots navigation.
-  
+Show dots navigation.
+
+
   * autoSlide
     * type: boolean
     * default: false
-  autoplay animation
-  
+autoplay animation
+
+
   * duration
     * type: number
     * default: 4000
-  autoplay speed
-  
+autoplay speed
+
+
   * equalHeights
     * type: boolean
     * default: false
-  set equal height for block `mySlider__item`
+set equal height for block `mySlider__item`
   
     
   
