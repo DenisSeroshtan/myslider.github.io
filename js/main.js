@@ -10,4 +10,5 @@ $(function () {
     duration: 3000,
     equalHeights: true
   })
+ 
 })

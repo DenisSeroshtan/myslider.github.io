@@ -19,13 +19,23 @@ img {
   width: 100%;
   min-height: 0;
 }
-
-.container {
-  margin-top: 40px;
+html,body {
+  height: 100%;
 }
-
+.wrapper {
+  min-height: 100%;
+  width: 100%;
+  background: #73b4b4;
+}
+.container {
+  padding: 10px 0;
+}
+.sliders__title {
+  margin: 5px 0;
+  text-align: center;
+}
 .slider,
-.slider__two {
+.slider__two{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,4 +44,7 @@ img {
   text-align: center;
   position: relative;
   margin-bottom: 30px;
+}
+.slider .mySlider__item{
+  background: none;
 }

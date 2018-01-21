@@ -1,3 +1,8 @@
+.mySlider {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
 .mySlider__list {
   position: relative;
   width: 100%;
