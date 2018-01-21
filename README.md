@@ -25,7 +25,7 @@ Set HTML
         <div class="mySlider__item"> some content </div>
     </div>
   ```
-  __html class 'mySlider' and 'mySlider__item' is required__
+  __html class `mySlider` and `mySlider__item` is required__
   
 Set JS  
   ```js
@@ -40,7 +40,7 @@ Set JS
     })
   ```
   
-### set equal height for `class = 'mySlider__item'`
+### set equal height for `mySlider__item`
   ```js
     $('.mySlider').mySlider({
       equalHeights: true
@@ -51,49 +51,50 @@ Set JS
   * activeSlideNum
     * type: number
     * default: 1
-the number of items you want to see on the screen.  
-
+    * description: the number of items you want to see on the screen
+ 
 
   * moveSlide
     * type: string
     * default: "horizontal"
-move animation of slides "horizontal" or "vertical"
+    * description: move animation of slides "horizontal" or "vertical"
 
 
   * buttons
     * type: boolean
     * default: true
-Show next/prev buttons.
+    * description: show next/prev buttons
 
 
   * btnArray
     * type: array
     * default: ['>', '<']
-HTML allowed
+    * description: HTML allowed
 
 
   * dots
     * type: boolean
     * default: true
-Show dots navigation.
+    * description: Show dots navigation.
 
 
   * autoSlide
     * type: boolean
     * default: false
-autoplay animation
+    * description: autoplay animation
 
 
   * duration
     * type: number
     * default: 4000
-autoplay speed
+    * description: autoplay speed
 
 
   * equalHeights
     * type: boolean
     * default: false
-set equal height for block `mySlider__item`
+    * description: set equal height for block `mySlider__item`
+
   
     
   
