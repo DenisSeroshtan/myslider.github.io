@@ -9,6 +9,7 @@
       btnArray: ['>', '<'],
       duration: 4000,
       autoSlide: false,
+      loop: true,
       equalHeights: false
     }, settings);
 
@@ -19,22 +20,6 @@
 
       if (!thisSlider.hasClass('mySlider')) {
         return;
-      }
-      // устанавливаем одинаковую высоту блокам items
-      if (options.equalHeights) {
-        function equal() {
-          items.height('auto');
-          maxHeight = 0
-          items.each(function () {
-            var
-              $this = $(this),
-              itemsHeight = $this.outerHeight();
-            maxHeight = (itemsHeight > maxHeight) ? itemsHeight : maxHeight;
-          })
-          items.height(maxHeight);
-        }
-        equal();
-        $(window).on('resize', equal);
       }
 
       var Slider = (function () {
@@ -54,6 +39,12 @@
             // автопереключение
             if (options.autoSlide)
               _this.autoSwitch();
+            
+            // эквивалентная высота для items
+            if(options.equalHeights){
+              _this.equalHeights();
+              $(window).on('resize', _this.equalHeights);
+            }
             // переключение по кнопкам
             btn.on('click', function (e) {
               e.preventDefault();
@@ -73,15 +64,16 @@
                 if (nextSlide.length) {
                   _this.moveSlide(nextSlide, 'forward');
                 } else {
-                  _this.moveSlide(firstSlide, 'forward');
+                  if (options.loop)
+                    _this.moveSlide(firstSlide, 'forward');
                 }
               } else {
                 if (prevSlide.length) {
                   _this.moveSlide(prevSlide, 'backward');
                 } else {
-                  _this.moveSlide(lastSlide, 'backward');
+                  if (options.loop)
+                    _this.moveSlide(lastSlide, 'backward');
                 }
-
               }
             });
             // переключение по точкам
@@ -180,6 +172,20 @@
               clearInterval(timer);
               this.autoSwitch();
             }
+          },
+          equalHeights: function () {
+            var maxHeight = 0;
+            
+            items.height('auto');
+            
+            items.each(function () {
+              var
+                $this = $(this),              
+                itemsHeight = $this.outerHeight();
+              
+              maxHeight = (itemsHeight > maxHeight) ? itemsHeight : maxHeight;
+            });
+            items.height(maxHeight);         
           },
           moveSlide: function (slide, direction) {
             var

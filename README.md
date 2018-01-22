@@ -94,7 +94,11 @@ Set JS
     * type: boolean
     * default: false
     * description: set equal height for block `mySlider__item`
-
+    
+  * loop
+    * type: boolean
+    * default: true
+    * description: Infinity loop. Duplicate last and first items to get loop illusion.  
   
     
   
